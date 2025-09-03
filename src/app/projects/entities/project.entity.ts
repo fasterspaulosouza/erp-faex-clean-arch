@@ -21,11 +21,17 @@ export class Project {
   @Column()
   name: string;
 
+  @Column()
+  description: string;
+
   @Column({ type: 'timestamp', nullable: true })
   startedAt: Date | null;
 
   @Column({ type: 'timestamp', nullable: true })
   finishedAt: Date | null;
+
+  @Column({ type: 'timestamp', nullable: true })
+  cancelledAt: Date | null;
 
   @Column({ type: 'enum', enum: ProjectStatus, default: ProjectStatus.Pending })
   status: ProjectStatus;
@@ -43,10 +49,13 @@ export class Project {
   })
   updatedAt: Date;
 
-  constructor(props?: {
-    name: string;
-    startedAt?: Date | null;
-    finishedAt?: Date | null;
+  constructor(
+    props?: {
+      name: string;
+      description: string;
+      startedAt?: Date | null;
+      finishedAt?: Date | null;
+      cancelledAt?: Date | null;
   }) {
     if (props) {
       Object.assign(this, props);
