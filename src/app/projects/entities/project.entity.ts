@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import {
   Column,
   CreateDateColumn,
@@ -56,9 +57,32 @@ export class Project {
       startedAt?: Date | null;
       finishedAt?: Date | null;
       cancelledAt?: Date | null;
-  }) {
-    if (props) {
+    },
+    id?: string
+    ) {
       Object.assign(this, props);
-    }
+      this.id = id ?? crypto.randomUUID();
+
+      if (props?.startedAt) {
+        this.start(props.startedAt);
+      }
   }
+
+  start(startedAt: Date) {
+    if (this.status === ProjectStatus.Active) {
+    throw new BadRequestException("Não é possível iniciar um projeto ativo!");
+    }
+
+    if (this.status === ProjectStatus.Completed) {
+    throw new BadRequestException("Não é possível iniciar um projeto concluído!");
+    }
+
+    if (this.status === ProjectStatus.Cancelled) {
+    throw new BadRequestException("Não é possível iniciar um projeto cancelado!");
+    }
+
+    this.startedAt = startedAt;
+    this.status = ProjectStatus.Active;
+  }
+
 }
