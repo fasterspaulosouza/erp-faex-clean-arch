@@ -38,9 +38,6 @@ export class User {
   @Column({ nullable: true })
   phone: string;
 
-  // @Column({ unique: true })
-  // document: string;
-
   @Column({ nullable: true })
   socialnetwork: string;
 
@@ -69,7 +66,6 @@ export class User {
       email: string;
       password: string;
       phone?: string | null;
-      // document: string;
       socialnetwork?: string | null;
     },
     id?: string,

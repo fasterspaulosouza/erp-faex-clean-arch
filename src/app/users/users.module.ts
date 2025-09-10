@@ -6,6 +6,8 @@ import { CreateUserUseCase } from './use-cases/create-user.use-case';
 import { FindAllUserUseCase } from './use-cases/find-all-user.use-case';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
+import { FindByIdUserUseCase } from './use-cases/find-by-id-user.use-case';
+import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -14,6 +16,8 @@ import { UsersService } from './users.service';
     UsersService,
     CreateUserUseCase,
     FindAllUserUseCase,
+    FindByIdUserUseCase,
+    RemoveUserUseCase,
     UserTypeOrmRepository,
     {
       provide: 'IUserRepository',

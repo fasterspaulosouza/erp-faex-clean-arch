@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 export interface IUserRepository {
   create(user: User): Promise<void>;
   update(user: User): Promise<void>;
+  remove(id: string): Promise<void>;
   findAll(): Promise<User[]>;
   findById(id: string): Promise<User>;
 }
@@ -23,6 +24,10 @@ export class UserTypeOrmRepository implements IUserRepository {
 
   async update(user: User): Promise<void> {
     await this.typeOrmRepo.update(user.id, user);
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.typeOrmRepo.delete(id);
   }
 
   findAll(): Promise<User[]> {

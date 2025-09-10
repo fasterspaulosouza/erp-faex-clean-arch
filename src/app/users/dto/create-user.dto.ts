@@ -9,8 +9,6 @@ export class CreateUserDto {
 
   phone: string | null;
 
-  // document: string;
-
   socialnetwork: string | null;
 
   role: RoleUser;
