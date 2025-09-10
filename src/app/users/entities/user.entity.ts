@@ -1,3 +1,4 @@
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import {
   Column,
@@ -77,5 +78,22 @@ export class User {
   async createHashPassword(password: string) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(password, salt);
+  }
+
+  verifyUser(user: User): void {
+    if (!user) {
+      throw new NotFoundException(`O usuario não foi encontrado!`);
+    }
+  }
+
+  updateDepto(depto: DeptoUser): void {
+    // Verifica se o valor existe no enum
+    if (!Object.values(DeptoUser).includes(depto as DeptoUser)) {
+      throw new BadRequestException(
+        `Departamento inválido. Valores permitidos: ${Object.values(DeptoUser).join(', ')}`,
+      );
+    }
+
+    this.depto = depto;
   }
 }

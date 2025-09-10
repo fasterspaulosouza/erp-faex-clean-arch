@@ -22,7 +22,7 @@ export class ProjectTypeOrmRepository implements IProjectRepository {
     }
 
     async update(project: Project): Promise<void> {
-        await this.typeOrmRepo.update(project.id, project);
+        await this.typeOrmRepo.save(project);
     }
 
     findAll(): Promise<Project[]> {

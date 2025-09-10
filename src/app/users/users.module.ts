@@ -8,6 +8,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { FindByIdUserUseCase } from './use-cases/find-by-id-user.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
+import { SetDeptoUserUseCase } from './use-cases/set-depto-user.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -18,6 +19,7 @@ import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
     FindAllUserUseCase,
     FindByIdUserUseCase,
     RemoveUserUseCase,
+    SetDeptoUserUseCase,
     UserTypeOrmRepository,
     {
       provide: 'IUserRepository',
