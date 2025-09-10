@@ -6,6 +6,8 @@ import { FindByIdUserUseCase } from './use-cases/find-by-id-user.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { SetDeptoUserUseCase } from './use-cases/set-depto-user.use-case';
 import { UpdateDeptoUserDto } from './dto/update-depto-user.dto';
+import { SetRoleUserUseCase } from './use-cases/set-role-user.use.case';
+import { UpdateRoleDto } from './dto/update-role-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -24,6 +26,9 @@ export class UsersController {
   @Inject(RemoveUserUseCase)
   private readonly removeUserUseCase: RemoveUserUseCase;
 
+  @Inject(SetRoleUserUseCase)
+  private readonly setRoleUserUseCase: SetRoleUserUseCase;
+
   @Get()
   findAll() {
     return this.findAllUserUseCase.execute();
@@ -37,6 +42,11 @@ export class UsersController {
   @Patch(':id/depto')
   async updateDepto(@Param('id') id: string, @Body() updateDeptoUserDto: UpdateDeptoUserDto) {
     return this.setDeptoUserUseCase.execute(id, updateDeptoUserDto);
+  }
+
+  @Patch(':id/role')
+  async updateRole(@Param('id') id: string, @Body() updateRoleDto: UpdateRoleDto) {
+    return this.setRoleUserUseCase.execute(id, updateRoleDto);
   }
   
   @Post()

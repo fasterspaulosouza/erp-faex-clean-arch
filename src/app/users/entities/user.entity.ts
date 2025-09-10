@@ -96,4 +96,18 @@ export class User {
 
     this.depto = depto;
   }
+
+  updateRole(role: RoleUser): void {
+    if (!Object.values(RoleUser).includes(role as RoleUser)) {
+      throw new BadRequestException(
+        `Role inválida. Valores permitidos: ${Object.values(RoleUser).join(', ')}`,
+      );
+    }
+
+    if (this.role === RoleUser.User) {
+      throw new BadRequestException("Você não tem permissão para alterar!");
+    }
+
+    this.role = role;
+  }
 }

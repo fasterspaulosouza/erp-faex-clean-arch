@@ -1,4 +1,4 @@
-import { DeptoUser, RoleUser } from '../entities/user.entity';
+import { DeptoUser } from '../entities/user.entity';
 
 export class UpdateDeptoUserDto {
   depto: DeptoUser;
